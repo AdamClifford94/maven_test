@@ -3,26 +3,26 @@ pipeline {
         docker { image 'maven:3-alpine' }
     }
     stages {
-        stage('SCM Checkout') {
+        stage('checkout') {
             steps {
                 git 'https://github.com/AdamClifford94/maven_test.git'
             }
         }
-        stage('Test-Package') {
+        stage('test') {
             steps {
                 sh 'mvn test'
             }
         }
-        stage('Compile-Package') {
+        stage('clean & package') {
             steps {
                 sh 'mvn clean'
                 sh 'mvn package'
             }
         }
-        stage('install-Package') {
+        stage('install') {
             steps {
                 sh 'mvn install'
             }
-        }        
+        }
     }
 }
